@@ -29,7 +29,6 @@ class StartReservationService
     public function isTokenHasValaidTime($token)
     {
         [, $dateTime] = explode('|', base64_decode($token));
-        \Log::info(Carbon::create($dateTime)->isPast());
         return !Carbon::create($dateTime)->isPast();
     }
     public function isTokenHasTheSameUser($token)

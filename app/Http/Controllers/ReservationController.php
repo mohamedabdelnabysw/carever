@@ -45,10 +45,4 @@ class ReservationController extends Controller
             "reservation_token" => $reservationToken
         ]);
     }
-    public function check(Request $request)
-    {
-        return response()->json(
-            $this->startReservationService->checkToken($request->token)
-        );
-    }
 }

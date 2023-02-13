@@ -1,6 +1,6 @@
 # Fleet Management System
 
-This repository is for Robusta Studio's task building a fleet management (bus booking) system.  
+This repository is for Bus Tickets Reservation System.  
 
 ## Built with
 
@@ -24,7 +24,7 @@ After you have installed Docker on your machine follow these steps to get the pr
 2. Install project dependencies
     ```
     docker-compose up -d
-    docker exec -it ticket-app bash
+    docker exec -it ticket-app-carever bash
     composer install
     php artisan key:generate 
     ```

@@ -20,7 +20,6 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('book', [ReservationController::class, 'store']);
     Route::get('search', [ReservationController::class, 'availableSeats']);
     Route::post('start-reservation', [ReservationController::class, 'start']);
-    Route::get('check', [ReservationController::class, 'check']);
 });
 Route::get('trips', [TripController::class, 'index']);
 Route::post('trip', [TripController::class, 'store']);
