@@ -4,7 +4,6 @@ namespace App\Http\Requests;
 
 use App\Models\Trip;
 use App\Services\StartReservationService;
-use App\Services\TripService;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ReserveRequest extends FormRequest
@@ -36,8 +35,8 @@ class ReserveRequest extends FormRequest
     public function withValidator($validator)
     {
         $validator->after(function ($validator) {
-            $trip = Trip::where('reservation_token', $this->reservation_token)->find($this->trip_id);
-            if (!$trip) {
+            $trip = Trip::where('reservation_token', $this->reservation_token)->first();
+            if ( StartReservationService::isInValidToken($this->reservation_token)) {
                 $validator->errors()->add('field', 'Token has expired');
             }
         });

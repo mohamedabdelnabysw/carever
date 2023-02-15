@@ -3,6 +3,7 @@
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\TripController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,7 +21,8 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('book', [ReservationController::class, 'store']);
     Route::get('search', [ReservationController::class, 'availableSeats']);
     Route::post('start-reservation', [ReservationController::class, 'start']);
+    Route::get('trips', [TripController::class, 'index']);
 });
-Route::get('trips', [TripController::class, 'index']);
 Route::post('trip', [TripController::class, 'store']);
+Route::get('users', [UserController::class, 'index']);
 Route::post('login', [LoginController::class, 'login']);

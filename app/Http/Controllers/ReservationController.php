@@ -19,6 +19,7 @@ class ReservationController extends Controller
     }
     public function store(ReserveRequest $request)
     {
+        $request->validated();
         foreach ($request->validated()['seat_ids'] as $id) {
             Ticket::create([
                 'seat_id' => $id,
@@ -26,6 +27,7 @@ class ReservationController extends Controller
                 'user_id' => auth()->user()->id
             ]);
         }
+        
         return response()->json(['message'=> 'Your Reservation is done']);
     }
 

@@ -14,7 +14,7 @@ class StartReservationService
     public function handle($tripId)
     {
         $trip = $this->tripService->find($tripId);
-        if (!$trip->reservation_token || !$this->isTokenHasValaidTime($trip->reservation_token)) {
+        if (!$trip->reservation_token || $this->isTokenPast($trip->reservation_token)) {
             return $this->createReservationToken($trip);
         }
         return null;
@@ -26,19 +26,19 @@ class StartReservationService
         $this->tripService->update(['reservation_token' => $token], $trip);
         return $token;
     }
-    public function isTokenHasValaidTime($token)
+    public static function isTokenPast($token): bool
     {
         [, $dateTime] = explode('|', base64_decode($token));
-        return !Carbon::create($dateTime)->isPast();
+        return Carbon::create($dateTime)->isPast();
     }
-    public function isTokenHasTheSameUser($token)
+    public static function isTokenHasNotTheSameUser($token): bool
     {
         [$id,] = explode('|', base64_decode($token));
-        return auth()->user()->id == $id; 
+        return auth()->user()->id != $id; 
     }
 
-    public function checkToken($token)
+    public static function isInValidToken($token): bool
     {
-        return $this->isTokenHasTheSameUser($token) && $this->isTokenHasValaidTime($token);
+        return (self::isTokenHasNotTheSameUser($token) || self::isTokenPast($token));
     }
 }

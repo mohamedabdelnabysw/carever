@@ -14,21 +14,21 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\User::factory(10)->create();
-        \App\Models\Station::factory(20)->create();
-        \App\Models\BusType::insert([
-            ['name'=> "long"],
-            ['name'=> "short"],
-        ]);
-        $types = \App\Models\BusType::all();
-        \App\Models\Bus::factory(1)->create([
-            'seats_count' => 20,
-            'bus_type_id' => $types->first()->id
-        ]);
-        \App\Models\Bus::factory(1)->create([
-            'seats_count' => 20,
-            'bus_type_id' => $types->last()->id
-        ]);
+        // \App\Models\User::factory(10)->create();
+        // \App\Models\Station::factory(20)->create();
+        // \App\Models\BusType::insert([
+        //     ['name'=> "long"],
+        //     ['name'=> "short"],
+        // ]);
+        // $types = \App\Models\BusType::all();
+        // \App\Models\Bus::factory(1)->create([
+        //     'seats_count' => 20,
+        //     'bus_type_id' => $types->first()->id
+        // ]);
+        // \App\Models\Bus::factory(1)->create([
+        //     'seats_count' => 20,
+        //     'bus_type_id' => $types->last()->id
+        // ]);
         $this->call([
             TripSeeder::class
         ]);
