@@ -1,0 +1,15 @@
+FROM php:8.2-fpm
+
+WORKDIR /var/www/html
+
+RUN apt-get update && apt-get install -y net-tools
+
+RUN docker-php-ext-configure pcntl --enable-pcntl \
+  && docker-php-ext-install \
+    pcntl
+
+COPY . .
+
+EXPOSE 8081
+
+ENTRYPOINT [ "php", "artisan", "reverb:start"]
